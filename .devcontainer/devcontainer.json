@@ -2,7 +2,9 @@
 // For config options, see the README at: https://github.com/devcontainers/templates/tree/main/src/ruby
 {
   "name": "store",
-  "dockerComposeFile": "compose.yaml",
+  "dockerComposeFile":  [
+    "../docker-compose.yml"
+  ],
   "service": "rails-app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
