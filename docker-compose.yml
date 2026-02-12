@@ -1,0 +1,25 @@
+services:
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile # Dockerfileの場所に合わせて調整
+    command: sleep infinity # Dev Containerが終了しないようにする
+    volumes:
+      - .:/workspace:cached
+    environment:
+      - DATABASE_URL=postgres://postgres:password@db:5432/postgres
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
